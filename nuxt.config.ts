@@ -8,5 +8,14 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ["@nuxtjs/color-mode", "@nuxtjs/tailwindcss"],
+  modules: ["@nuxtjs/color-mode", "@nuxtjs/tailwindcss", "@pinia/nuxt"],
+  pinia: {
+    storesDirs: ["./stores/**"],
+  },
+  components: [
+    {
+      path: "~/components",
+      pathPrefix: false,
+    },
+  ],
 });
