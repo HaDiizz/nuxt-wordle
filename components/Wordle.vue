@@ -56,9 +56,9 @@ watch([isCorrect, attempt], ([newIsCorrect, newAttempt]) => {
         </div>
       </div>
     </dialog>
-    <div class="flex flex-col gap-y-5 pb-5">
+    <!-- <div class="flex flex-col gap-y-5 pb-5">
       <span>Solution: {{ wordStore.solution }}</span>
-    </div>
+    </div> -->
 
     <GridContent
       :guesses="guesses"
