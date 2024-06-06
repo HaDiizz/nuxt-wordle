@@ -12,7 +12,7 @@ const reactiveProps = ref({ ...props });
 const keyboardLayout = ref([
   ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
   ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
-  ["Delete", "z", "x", "c", "v", "b", "n", "m", "Enter"],
+  ["Backspace", "z", "x", "c", "v", "b", "n", "m", "Enter"],
 ]);
 watch(
   props,
