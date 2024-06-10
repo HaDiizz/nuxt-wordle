@@ -1,7 +1,12 @@
 <script setup>
+const { data, signOut } = useAuth();
 const colorMode = useColorMode();
 const changeColor = () =>
   (colorMode.preference = colorMode.value === "light" ? "dark" : "light");
+
+function handleSignOut() {
+  signOut();
+}
 </script>
 
 <template>
@@ -29,14 +34,13 @@ const changeColor = () =>
             tabindex="0"
             class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li><a>Homepage</a></li>
-            <li><a>Portfolio</a></li>
-            <li><a>About</a></li>
+            <li><a>Top Ranking</a></li>
+            <li><a>How to play ?</a></li>
           </ul>
         </div>
       </div>
       <div class="navbar-center">
-        <a class="btn btn-ghost text-xl">daisyUI</a>
+        <NuxtLink to="/" class="btn btn-ghost text-xl">WORDLES</NuxtLink>
       </div>
       <div class="navbar-end gap-x-5">
         <button
@@ -79,7 +83,7 @@ const changeColor = () =>
             </svg>
           </ColorScheme>
         </button>
-        <div class="dropdown dropdown-end">
+        <div v-if="data" class="dropdown dropdown-end">
           <div
             tabindex="0"
             role="button"
@@ -87,25 +91,43 @@ const changeColor = () =>
           >
             <div class="w-10 rounded-full">
               <img
-                alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                alt="User Profile"
+                :src="`https://api.dicebear.com/8.x/thumbs/svg?scale=85&shapeColor=5D00FF&backgroundColor=D7C0FF&seed=${data.user.username}`"
               />
             </div>
           </div>
           <ul
             tabindex="0"
-            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 bg-ground-100"
           >
-            <li>
-              <a class="justify-between">
-                Profile
-                <span class="badge">New</span>
-              </a>
+            <div class="px-3 py-1 flex flex-col rounded-lg">
+              <span class="text-sm font-bold uppercase">
+                {{ data.user.username }}</span
+              >
+              <span class="text-xs text-neutral-500">
+                {{ data.user.email }}</span
+              >
+            </div>
+            <li class="py-1">
+              <NuxtLink to="/profile"> Profile </NuxtLink>
             </li>
-            <li><a>Settings</a></li>
-            <li><a>Logout</a></li>
+            <li class="py-1">
+              <button
+                @click="handleSignOut"
+                class="text-red-500 hover:text-white hover:bg-red-500"
+              >
+                Logout
+              </button>
+            </li>
           </ul>
         </div>
+        <NuxtLink
+          v-else
+          to="/sign-in"
+          class="btn text-white bg-indigo-500 hover:bg-indigo-600"
+        >
+          Sign in
+        </NuxtLink>
       </div>
     </div>
   </div>

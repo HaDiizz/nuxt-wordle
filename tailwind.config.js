@@ -13,7 +13,24 @@ module.exports = {
     extend: {},
   },
   daisyui: {
-    themes: ["night", "winter"],
+    themes: [
+      {
+        night: {
+          ...require("daisyui/src/theming/themes")["night"],
+          ".bg-ground-100": {
+            "background-color": "#09101f96",
+          },
+        },
+      },
+      {
+        winter: {
+          ...require("daisyui/src/theming/themes")["winter"],
+          ".bg-ground-100": {
+            "background-color": "#d2d7de47",
+          },
+        },
+      },
+    ],
   },
   plugins: [require("daisyui")],
 };

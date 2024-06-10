@@ -1,7 +1,7 @@
 <template>
   <div>
     <NuxtLayout>
-      <div class="px-[8rem] py-5">
+      <div class="px-5 md:px-[8rem] py-5">
         <NuxtPage />
       </div>
     </NuxtLayout>
@@ -18,6 +18,12 @@ onMounted(() => {
       .setAttribute(
         "data-theme",
         colorMode.value === "light" ? "winter" : "night"
+      );
+    document
+      .querySelector("html")
+      .setAttribute(
+        "class",
+        colorMode.value === "light" ? "light light-mode" : "dark dark-mode"
       );
   });
 });
