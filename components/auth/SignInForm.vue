@@ -107,8 +107,11 @@ const onSubmit = handleSubmit(async (values) => {
         </div>
       </label>
       <div class="flex justify-between items-center">
-        <button class="btn bg-indigo-500 hover:bg-indigo-600 text-white">
-          Sign In
+        <button
+          :disabled="isLoading"
+          class="btn bg-indigo-500 hover:bg-indigo-600 text-white"
+        >
+          Sign In <span class="loading loading-spinner" v-if="isLoading"></span>
         </button>
         <span
           >Don't have an account yet ?

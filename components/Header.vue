@@ -32,7 +32,7 @@ function handleSignOut() {
           </div>
           <ul
             tabindex="0"
-            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 bg-ground-100"
           >
             <li><a>Top Ranking</a></li>
             <li><a>How to play ?</a></li>
