@@ -20,6 +20,9 @@ useSeoMeta({
   twitterCard: "/logo.png",
   keywords:
     "Wordle, word game, puzzle, vocabulary, login, top rank, leaderboard, daily challenge, word puzzle, competitive gaming, word guessing, social sharing",
+  verification: {
+    google: "QB4p2TnjStku0tmNesYkGbbesYkOJotOg4oUbN7i5qo",
+  },
 });
 const colorMode = useColorMode();
 
