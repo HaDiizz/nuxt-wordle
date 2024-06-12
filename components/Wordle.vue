@@ -139,11 +139,11 @@ async function resetAll() {
                   <td>Score</td>
                   <td>+{{ currentScore <= 0 ? 1 : currentScore }} points</td>
                 </tr>
-                <tr>
+                <tr v-if="session?.user">
                   <td>Total Score</td>
                   <td>{{ session.user.scores }} points</td>
                 </tr>
-                <tr>
+                <tr v-if="session?.user">
                   <td>Win Rate</td>
                   <td>
                     {{
