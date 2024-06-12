@@ -17,6 +17,9 @@ module.exports = {
       {
         night: {
           ...require("daisyui/src/theming/themes")["night"],
+          ".bg-ground-default": {
+            "background-color": "#0F172A",
+          },
           ".bg-ground-100": {
             "background-color": "#09101f96",
           },
@@ -25,6 +28,9 @@ module.exports = {
       {
         winter: {
           ...require("daisyui/src/theming/themes")["winter"],
+          ".bg-ground-default": {
+            "background-color": "#FFFFFF",
+          },
           ".bg-ground-100": {
             "background-color": "#d2d7de47",
           },

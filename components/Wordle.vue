@@ -1,4 +1,5 @@
 <script setup>
+import { toast } from "vue3-toastify";
 import { useWordle } from "../composables/useWordle.js";
 import { onMounted, onBeforeUnmount, watch } from "vue";
 import GridContent from "./Board/GridContent";
@@ -7,9 +8,17 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  startTime: {
+    type: Date,
+    required: true,
+  },
 });
+const { data: session } = useAuth();
+const TOTAL_SCORE = 6;
+const currentScore = ref(6);
 const wordStore = useWordStore();
 const solution = ref(props.solution);
+const startTime = ref(props.startTime);
 const hint = ref(new Array(5).fill("_"));
 const hintCount = ref(3);
 const {
@@ -30,10 +39,40 @@ onMounted(() => {
   });
 });
 
-watch([isCorrect, attempt], ([newIsCorrect, newAttempt]) => {
+watch([isCorrect, attempt], async ([newIsCorrect, newAttempt]) => {
   if (newIsCorrect || newAttempt > 5) {
+    if (newIsCorrect && session?.value?.user) {
+      currentScore.value =
+        TOTAL_SCORE -
+        (guesses?.value?.filter((value) => value !== undefined).length - 1) -
+        hint.value.filter((value) => value !== "_").length;
+      const data = await $fetch("/api/game", {
+        method: "PUT",
+        body: {
+          gamesWon: true,
+          scores: currentScore.value <= 0 ? 1 : currentScore.value,
+        },
+      });
+      if (data?.error) {
+        toast.error(data.message);
+        return;
+      }
+      toast.success(data.message);
+    } else if (newAttempt > 5 && session?.value?.user && !newIsCorrect) {
+      const data = await $fetch("/api/game", {
+        method: "PUT",
+        body: {
+          gamesLost: true,
+        },
+      });
+      if (data?.error) {
+        toast.error(data.message);
+        return;
+      }
+      toast.success(data.message);
+    }
     setTimeout(() => {
-      document.getElementById("my_modal_1").showModal();
+      document.getElementById("statModal").showModal();
     }, 1000);
     // window.removeEventListener("keyup", handleKeyup);
   }
@@ -44,7 +83,6 @@ function randomWord() {
 }
 
 function hintSolution() {
-  console.log("แหน่ะ! แอบดูเฉลยเหรอจ๊ะ 👻", wordStore.solution);
   if (hintCount.value <= 0) return;
   if (!hint.value.some((char) => char === "_")) return;
   let index = randomWord();
@@ -58,21 +96,65 @@ function hintSolution() {
   hintCount.value--;
 }
 
-function resetAll() {
+async function resetAll() {
+  if (session?.value?.user) {
+    const data = await $fetch("/api/game", {
+      method: "PUT",
+      body: {
+        gamesPlayed: true,
+      },
+    });
+    if (data?.error) {
+      toast.error(data.message);
+      return;
+    }
+    toast.success(data.message);
+  }
   resetGame();
   hint.value = new Array(5).fill("_");
   hintCount.value = 3;
+  startTime.value = new Date();
 }
 </script>
 <template>
   <div>
-    <dialog id="my_modal_1" class="modal">
+    <dialog id="statModal" class="modal">
       <div class="modal-box">
         <h3 v-if="isCorrect" class="font-bold text-lg">Congratulation ! 🎉</h3>
         <h3 v-if="!isCorrect" class="font-bold text-lg">Oops, try again 👻</h3>
         <div class="py-4 pt-10" v-if="isCorrect">
-          Do you want to play more ? Press
-          <span class="text-indigo-500 font-bold">Play again</span>
+          <div class="flex flex-col gap-y-3 text-lg">
+            <table
+              className="table-auto text-small border-separate border-spacing-y-3 border-spacing-x-3"
+            >
+              <tbody>
+                <tr>
+                  <td>Time used</td>
+                  <td>
+                    {{ ((new Date() - startTime) / 60000).toFixed(2) }}
+                    minutes
+                  </td>
+                </tr>
+                <tr>
+                  <td>Score</td>
+                  <td>+{{ currentScore <= 0 ? 1 : currentScore }} points</td>
+                </tr>
+                <tr>
+                  <td>Total Score</td>
+                  <td>{{ session.user.scores }} points</td>
+                </tr>
+                <tr>
+                  <td>Win Rate</td>
+                  <td>
+                    {{
+                      (session.user.gamesWon / session.user.gamesPlayed) * 100
+                    }}
+                    %
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="py-5 pt-10" v-if="!isCorrect">
           The solution is

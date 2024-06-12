@@ -7,10 +7,54 @@ const changeColor = () =>
 function handleSignOut() {
   signOut();
 }
+
+function handleOpenHowToPlay() {
+  document.getElementById("how-to-play").showModal();
+}
 </script>
 
 <template>
   <div>
+    <dialog id="how-to-play" class="modal">
+      <div class="modal-box">
+        <h3 class="font-bold text-lg text-center">How to Play?</h3>
+        <div class="flex flex-col gap-y-5 pt-5">
+          <div>
+            <span class="text-md font-bold">Basic Rules</span>
+            <ul class="text-sm text-neutral-500 gap-y-2 list-disc p-2">
+              <li class="py-1">
+                Start the Game: Open Wordle in your web browser. Each day there
+                is a new word to guess.
+              </li>
+              <li class="py-1">
+                Guess the Word: Enter a five-letter word in the provided input
+                box. Click "Enter" to submit your guess.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <span class="text-md font-bold">Color Feedback</span>
+            <ul class="text-sm text-neutral-500 gap-y-2 list-disc p-2">
+              <li class="py-1">
+                <span class="text-green-500">Green</span>: The letter is in the
+                word and in the correct position.
+              </li>
+              <li class="py-1">
+                <span class="text-yellow-500">Yellow</span>: The letter is in
+                the word but in the wrong position.
+              </li>
+              <li class="py-1">
+                <span class="text-neutral-600">Gray</span>: The letter is not in
+                the word at all.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
+    </dialog>
     <div class="navbar bg-base-100">
       <div class="navbar-start">
         <div class="dropdown">
@@ -32,10 +76,12 @@ function handleSignOut() {
           </div>
           <ul
             tabindex="0"
-            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 bg-ground-100"
+            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52 bg-slate-50 dark:bg-slate-950"
           >
-            <li><a>Top Ranking</a></li>
-            <li><a>How to play ?</a></li>
+            <li><NuxtLink to="/top-rank">Top Ranking</NuxtLink></li>
+            <li>
+              <button @click="handleOpenHowToPlay">How to play ?</button>
+            </li>
           </ul>
         </div>
       </div>
@@ -98,7 +144,7 @@ function handleSignOut() {
           </div>
           <ul
             tabindex="0"
-            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 bg-ground-100"
+            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52 bg-slate-50 dark:bg-slate-950"
           >
             <div class="px-3 py-1 flex flex-col rounded-lg">
               <span class="text-sm font-bold uppercase">
@@ -108,9 +154,6 @@ function handleSignOut() {
                 {{ data.user.email }}</span
               >
             </div>
-            <li class="py-1">
-              <NuxtLink to="/profile"> Profile </NuxtLink>
-            </li>
             <li class="py-1">
               <button
                 @click="handleSignOut"

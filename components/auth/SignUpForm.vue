@@ -25,7 +25,6 @@ const onSubmit = handleSubmit(async (values) => {
       name: "sign-in",
     });
   } catch (err) {
-    console.log(err);
     toast.error("Something went wrong");
   } finally {
     isLoading.value = false;

@@ -33,7 +33,6 @@ const onSubmit = handleSubmit(async (values) => {
       path: "/",
     });
   } catch (err) {
-    console.log(err);
     toast.error("Something went wrong");
   } finally {
     isLoading.value = false;

@@ -61,6 +61,14 @@ export default NuxtAuthHandler({
     },
 
     async session({ session, token }) {
+      if (token) {
+        let userData = await User.findOne({
+          email: token.email,
+          username: token.username,
+        }).select("-password");
+        userData = userData.toObject();
+        token = { ...userData, _id: userData._id.toString() };
+      }
       session.user = {
         ...token,
         ...session.user,

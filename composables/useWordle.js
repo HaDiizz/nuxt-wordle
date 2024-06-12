@@ -1,5 +1,6 @@
 import { ref, computed } from "vue";
 import { useWordStore } from "../stores/wordle";
+import { toast } from "vue3-toastify";
 
 export const useWordle = (solution) => {
   const wordStore = useWordStore();
@@ -69,21 +70,24 @@ export const useWordle = (solution) => {
   };
 
   const handleKeyup = ({ key }) => {
+    if (isCorrect.value) {
+      return;
+    }
     if (key === "Enter") {
       if (attempt.value > 5) {
-        console.log("You have been used all your guess.");
+        toast.error("You have been used all your guess.");
         return;
       }
       if (previous.value.includes(currentGuess.value)) {
-        console.log("You already have tried this word.");
+        toast.error("You already have tried this word.");
         return;
       }
       if (currentGuess.value.length !== 5) {
-        console.log("Word must be 5 characters.");
+        toast.error("Word must be 5 characters.");
         return;
       }
       if (!wordStore.wordSet.has(currentGuess.value.toLowerCase())) {
-        console.log(`[ ${currentGuess.value} ] Not found in word list.`);
+        toast.error(`"${currentGuess.value}" not found in word list.`);
         return;
       }
       const formatted = formatGuess();

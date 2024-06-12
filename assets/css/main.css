@@ -155,3 +155,90 @@ html {
     border-color: #333;
   }
 }
+
+.start-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+  padding: 17px 40px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 0;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  transition: all 0.5s ease;
+}
+
+.start-btn:hover {
+  letter-spacing: 3px;
+  background-color: hsl(261deg 80% 48%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+}
+
+.start-btn:active {
+  letter-spacing: 3px;
+  background-color: hsl(261deg 80% 48%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+  transform: translateY(10px);
+  transition: 100ms;
+}
+
+.start-btn .text {
+  position: relative;
+  z-index: 1;
+  transform: translateX(-12px);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.start-btn svg {
+  position: absolute;
+  width: 24px;
+  fill: rgb(107, 27, 255);
+  z-index: 9;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.start-btn .arr-1 {
+  right: 16px;
+}
+
+.start-btn .arr-2 {
+  left: -25%;
+}
+
+.start-btn:hover .arr-1 {
+  right: -25%;
+}
+
+.start-btn:hover .arr-2 {
+  left: 16px;
+}
+
+.start-btn:hover .text {
+  transform: translateX(12px);
+}
+
+.start-btn:hover svg {
+  fill: #ffffff;
+}
+
+[data-theme="night"] .ranking-table {
+  background-color: #09101f96 !important;
+  color: white !important;
+}
+
+[data-theme="night"] .ranking-table table thead tr th {
+  background-color: #09101f96 !important;
+  color: white !important;
+}
+
+[data-theme="night"] .ranking-table table thead tr th:hover {
+  color: white !important;
+}
