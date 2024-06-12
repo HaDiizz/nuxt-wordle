@@ -88,7 +88,7 @@ async function handleStartGame() {
         />
       </div>
       <div v-else class="pt-[15rem]">
-        <button class="start-btn bg-ground-100" @click="handleOpenConfirm">
+        <span class="start-btn bg-ground-100" @click="handleOpenConfirm">
           <svg
             viewBox="0 0 24 24"
             class="arr-2"
@@ -98,7 +98,7 @@ async function handleStartGame() {
               d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
             ></path>
           </svg>
-          <span class="text">Let's start the game</span>
+          <h1 class="text">Let's start the game</h1>
           <svg
             viewBox="0 0 24 24"
             class="arr-1"
@@ -108,7 +108,7 @@ async function handleStartGame() {
               d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
             ></path>
           </svg>
-        </button>
+        </span>
       </div>
     </div>
   </div>

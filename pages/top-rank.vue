@@ -106,9 +106,9 @@ onMounted(() => {
 <template>
   <v-app>
     <div class="bg-ground-default h-screen p-3">
-      <div class="dark:text-white pb-8 text-4xl uppercase font-bold">
+      <h1 class="dark:text-white pb-8 text-4xl uppercase font-bold">
         Leader Board
-      </div>
+      </h1>
       <div
         v-if="session?.user"
         class="overflow-x-auto px-10 mb-10 rounded-md border-2 border-indigo-500 shadow-[0px_0px_20px_3px_#6610FB]"

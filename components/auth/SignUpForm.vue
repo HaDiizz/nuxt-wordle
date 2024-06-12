@@ -34,9 +34,9 @@ const onSubmit = handleSubmit(async (values) => {
 
 <template>
   <div class="card w-full md:w-3/4 p-8 bg-ground-100">
-    <span class="text-left py-8 font-extrabold text-lg md:text-xl"
-      >Sign up to WORDLES</span
-    >
+    <h1 class="text-left py-8 font-extrabold text-lg md:text-xl">
+      Sign up to WORDLES
+    </h1>
     <form @submit="onSubmit" class="flex flex-col gap-y-7 pt-8 pb-8">
       <label
         :class="{
