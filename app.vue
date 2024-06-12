@@ -16,10 +16,10 @@ useSeoMeta({
     "Nuxt Wordle is the ultimate word puzzle game where players test their vocabulary skills to guess the hidden word in six tries. With features like secure login, competitive top rank leaderboard, and daily word challenges, Nuxt Wordle offers a fun and engaging experience for all word game enthusiasts.",
   ogDescription:
     "Nuxt Wordle is the ultimate word puzzle game where players test their vocabulary skills to guess the hidden word in six tries. With features like secure login, competitive top rank leaderboard, and daily word challenges, Nuxt Wordle offers a fun and engaging experience for all word game enthusiasts.",
-  ogImage: "/logo.png",
-  twitterCard: "/logo.png",
+  ogImage: "/og-image.jpg",
+  twitterCard: "/og-image.jpg",
   keywords:
-    "Wordle, word game, puzzle, vocabulary, login, top rank, leaderboard, daily challenge, word puzzle, competitive gaming, word guessing, social sharing",
+    "Wordle, word game, puzzle, vocabulary, login, top rank, leaderboard, daily challenge, word puzzle, competitive gaming, word guessing, social sharing, nuxt wordles, nuxt wordle, the best wordle",
 });
 const colorMode = useColorMode();
 
