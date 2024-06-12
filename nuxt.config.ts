@@ -1,6 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 export default defineNuxtConfig({
+  site: {
+    trailingSlash: true,
+  },
   runtimeConfig: {
     dbURI: process.env.MONGODB_URI,
     authSecret: process.env.AUTH_SECRET,
@@ -17,6 +20,7 @@ export default defineNuxtConfig({
     transpile: ["vuetify"],
   },
   modules: [
+    "@nuxtjs/sitemap",
     "@nuxtjs/color-mode",
     "@nuxtjs/tailwindcss",
     "@pinia/nuxt",

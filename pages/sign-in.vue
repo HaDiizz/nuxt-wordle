@@ -2,6 +2,11 @@
 definePageMeta({
   middleware: ["auth"],
 });
+
+useSeoMeta({
+  titleTemplate: "%s - Sign in",
+  ogTitle: "%s - Sign in",
+});
 </script>
 <template>
   <div>

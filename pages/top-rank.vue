@@ -1,6 +1,11 @@
 <script setup>
 import { ref, reactive, watch, onMounted } from "vue";
 
+useSeoMeta({
+  titleTemplate: "%s - Leader Board",
+  ogTitle: "%s - Leader Board",
+});
+
 const { data: session } = useAuth();
 
 const itemsPerPage = ref(5);
@@ -102,7 +107,7 @@ onMounted(() => {
   <v-app>
     <div class="bg-ground-default h-screen p-3">
       <div class="dark:text-white pb-8 text-4xl uppercase font-bold">
-        Top rank
+        Leader Board
       </div>
       <div
         v-if="session?.user"
