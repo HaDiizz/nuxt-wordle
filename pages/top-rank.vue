@@ -135,7 +135,7 @@ onMounted(() => {
                 <div class="avatar p-2">
                   <div class="mask mask-squircle w-12 h-12">
                     <img
-                      :src="`https://api.dicebear.com/8.x/thumbs/svg?scale=85&shapeColor=5D00FF&backgroundColor=D7C0FF&seed=${session.username}`"
+                      :src="`https://api.dicebear.com/8.x/thumbs/svg?scale=85&shapeColor=5D00FF&backgroundColor=D7C0FF&seed=${session.user.username}`"
                       alt="User Image"
                     />
                   </div>
