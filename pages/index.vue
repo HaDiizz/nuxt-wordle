@@ -42,7 +42,7 @@ async function handleStartGame() {
     <dialog id="confirmModal" class="modal">
       <div class="modal-box">
         <h3 class="font-bold text-lg">Confirmation</h3>
-        <div class="py-4 pt-10 flex flex-col gap-y-5" v-if="session?.user">
+        <div v-if="session?.user" class="py-4 pt-10 flex flex-col gap-y-5">
           <div>Do you want to start the game ?</div>
           <div class="text-sm text-neutral-500">
             When you press start, the game will immediately begin recording the
@@ -56,14 +56,16 @@ async function handleStartGame() {
             time.
           </div>
         </div>
-        <div class="py-4 pt-10 flex flex-col gap-y-5" v-else>
+        <div v-else class="py-4 pt-10 flex flex-col gap-y-5">
           <div>Do you want to start the game ?</div>
-          <div class="text-sm text-neutral-500">
+          <span class="text-sm text-neutral-500">
             Please log in to access your statistics and gameplay details.
-            <NuxtLink to="/sign-in" class="text-indigo-500 font-semibold"
+            <NuxtLink
+              to="/sign-in"
+              class="text-indigo-500 font-semibold focus-visible:outline-none"
               >Login</NuxtLink
             >
-          </div>
+          </span>
         </div>
 
         <div class="modal-action">

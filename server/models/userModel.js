@@ -25,7 +25,6 @@ const UserSchema = new Schema({
   gamesPlayed: { type: Number, default: 0 },
   gamesWon: { type: Number, default: 0 },
   gamesLost: { type: Number, default: 0 },
-  gamesIncomplete: { type: Number, default: 0 },
 });
 
 export const User = model("user", UserSchema);
