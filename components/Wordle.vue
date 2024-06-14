@@ -232,7 +232,7 @@ async function resetAll() {
       :currentGuess="currentGuess"
       :attempt="attempt"
     />
-    <div class="pt-5 text-[13px] md:text-lg">
+    <div class="pt-5 text-[11px] md:text-lg">
       <KeyBoard :usedKeys="usedKeys" :handleKeyup="handleKeyup" />
     </div>
   </div>
