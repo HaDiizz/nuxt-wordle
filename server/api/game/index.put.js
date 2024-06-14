@@ -20,7 +20,13 @@ export default defineEventHandler(async (event) => {
         { $inc: { gamesWon: 1, scores: body.scores } },
         { new: true }
       );
-      return { success: true, message: "You won the game 🔥" };
+      user = user.toObject();
+      delete user.password;
+      return {
+        success: true,
+        message: "You won the game 🔥",
+        user: { ...user, _id: user._id.toString() },
+      };
     }
     if (body.gamesLost) {
       user = await User.findOneAndUpdate(
@@ -28,10 +34,22 @@ export default defineEventHandler(async (event) => {
         { $inc: { gamesLost: 1 } },
         { new: true }
       );
-      return { success: true, message: "Oops, nice try 👻" };
+      user = user.toObject();
+      delete user.password;
+      return {
+        success: true,
+        message: "Oops, nice try 👻",
+        user: { ...user, _id: user._id.toString() },
+      };
     }
     if (!user) return { error: true, message: "Unauthorized" };
-    return { success: true, message: "Game started. 🚀" };
+    user = user.toObject();
+    delete user.password;
+    return {
+      success: true,
+      message: "Game started. 🚀",
+      user: { ...user, _id: user._id.toString() },
+    };
   } catch (err) {
     return { error: true, message: "Something went wrong" };
   }

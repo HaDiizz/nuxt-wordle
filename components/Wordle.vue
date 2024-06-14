@@ -16,6 +16,11 @@ const props = defineProps({
 const { data: session } = useAuth();
 const TOTAL_SCORE = 6;
 const currentScore = ref(6);
+const totalStat = reactive({
+  scores: session?.user?.scores || 0,
+  winRate: session?.user?.winRate || 0,
+  gamesPlayed: session?.user?.gamesPlayed || 0,
+});
 const wordStore = useWordStore();
 const solution = ref(props.solution);
 const startTime = ref(props.startTime);
@@ -57,6 +62,9 @@ watch([isCorrect, attempt], async ([newIsCorrect, newAttempt]) => {
         toast.error(data.message);
         return;
       }
+      totalStat.gamesPlayed = data.user.gamesPlayed;
+      totalStat.scores = data.user.scores;
+      totalStat.winRate = (data.user.gamesWon / data.user.gamesPlayed) * 100;
       toast.success(data.message);
     } else if (newAttempt > 5 && session?.value?.user && !newIsCorrect) {
       const data = await $fetch("/api/game", {
@@ -69,6 +77,9 @@ watch([isCorrect, attempt], async ([newIsCorrect, newAttempt]) => {
         toast.error(data.message);
         return;
       }
+      totalStat.gamesPlayed = data.user.gamesPlayed;
+      totalStat.scores = data.user.scores;
+      totalStat.winRate = (data.user.gamesWon / data.user.gamesPlayed) * 100;
       toast.success(data.message);
     }
     setTimeout(() => {
@@ -108,6 +119,9 @@ async function resetAll() {
       toast.error(data.message);
       return;
     }
+    totalStat.gamesPlayed = data.user.gamesPlayed;
+    totalStat.scores = data.user.scores;
+    totalStat.winRate = (data.user.gamesWon / data.user.gamesPlayed) * 100;
     toast.success(data.message);
   }
   resetGame();
@@ -141,14 +155,12 @@ async function resetAll() {
                 </tr>
                 <tr v-if="session?.user">
                   <td>Total Score</td>
-                  <td>{{ session.user.scores }} points</td>
+                  <td>{{ totalStat.scores }} points</td>
                 </tr>
                 <tr v-if="session?.user">
                   <td>Win Rate</td>
                   <td>
-                    {{
-                      (session.user.gamesWon / session.user.gamesPlayed) * 100
-                    }}
+                    {{ totalStat.winRate.toFixed(2) }}
                     %
                   </td>
                 </tr>

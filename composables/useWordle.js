@@ -87,7 +87,9 @@ export const useWordle = (solution) => {
         return;
       }
       if (!wordStore.wordSet.has(currentGuess.value.toLowerCase())) {
-        toast.error(`"${currentGuess.value}" not found in word list.`);
+        toast.error(
+          `"${currentGuess?.value?.toUpperCase()}" not found in word list.`
+        );
         return;
       }
       const formatted = formatGuess();
